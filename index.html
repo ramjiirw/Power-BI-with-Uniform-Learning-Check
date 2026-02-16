@@ -138,21 +138,9 @@ button {
 
 <div class="content" id="intro">
   <h2 style="color:#1e3c72;margin-bottom:15px;">Power BI with Uniform – Learning Check</h2>
-
-  <p style="margin-bottom:12px;">
-    You’ve now completed the Power BI with Uniform training.
-  </p>
-
-  <p style="margin-bottom:12px;">
-    This short learning check reinforces how Power BI works with Uniform data,
-    including preparation, modelling, calculations, and reporting behaviour.
-  </p>
-
-  <p style="margin-bottom:20px;">
-    Choose the answer that best reflects how Power BI behaves in real Uniform
-    reporting scenarios. You’ll see instructional feedback after each question.
-  </p>
-
+  <p style="margin-bottom:12px;">You’ve now completed the Power BI with Uniform training.</p>
+  <p style="margin-bottom:12px;">This learning check reinforces how Power BI works with Uniform data.</p>
+  <p style="margin-bottom:20px;">Choose the answer that best reflects real reporting behaviour.</p>
   <button class="btn-primary" onclick="startQuiz()">Start learning check</button>
 </div>
 
@@ -164,7 +152,6 @@ button {
 <script>
 
 const quizData = [
-
 {
 question:"What is the main purpose of using Power BI alongside Uniform?",
 options:[
@@ -174,9 +161,8 @@ options:[
 "To enter and update case data"
 ],
 correct:1,
-explanation:"Power BI is used to analyse, summarise, and present data that already exists in Uniform. It allows users to explore volumes, performance, trends, and outcomes across large numbers of cases. Power BI does not replace Uniform, and it does not allow users to enter or update case data. All operational work continues to take place within Uniform itself."
+explanation:"Power BI is used to analyse, summarise, and present data that already exists in Uniform. It does not replace Uniform or allow data entry."
 },
-
 {
 question:"When connecting Power BI to Uniform using ODBC, which statement is correct?",
 options:[
@@ -186,11 +172,10 @@ options:[
 "The connection is read-only"
 ],
 correct:3,
-explanation:"When Power BI connects to Uniform via ODBC, the connection is strictly read-only. Power BI can query and retrieve data, but it cannot insert, update, or delete records in Uniform. Refreshing a dataset simply re-reads the data; it does not make any changes to the source system."
+explanation:"ODBC connections are read-only. Power BI cannot insert, update, or delete Uniform data."
 },
-
 {
-question:"Where should you rename Uniform field names so the change applies everywhere in the report?",
+question:"Where should you rename Uniform field names so the change applies everywhere?",
 options:[
 "In Power Query",
 "In Table view",
@@ -198,11 +183,10 @@ options:[
 "In the report canvas"
 ],
 correct:0,
-explanation:"Renaming fields in Power Query sets the column name once, before the data is loaded into the model. This renamed field is then used consistently across tables, measures, visuals, and pages. Renaming elsewhere only affects appearance in a limited context."
+explanation:"Renaming in Power Query applies the change across the entire model."
 },
-
 {
-question:"You want a report to include only cases received in the last 5 years. Where should this filter usually be applied?",
+question:"You want only cases from the last 5 years. Where should this filter be applied?",
 options:[
 "In every visual",
 "In a slicer only",
@@ -210,11 +194,10 @@ options:[
 "In visual-level filters"
 ],
 correct:2,
-explanation:"Applying this filter in Power Query defines the scope of the dataset before it is loaded. This ensures that all measures, visuals, and pages are built on the same controlled set of data, and avoids repeatedly applying the same filter in multiple places."
+explanation:"Filtering in Power Query defines the dataset scope before reporting begins."
 },
-
 {
-question:"What does a relationship between Uniform tables tell Power BI?",
+question:"What does a relationship between Uniform tables define?",
 options:[
 "Which table loads first",
 "Which rows belong together",
@@ -222,11 +205,10 @@ options:[
 "Which table is editable"
 ],
 correct:1,
-explanation:"Relationships tell Power BI how records in one table relate to records in another, usually through a shared key. This allows case records, inspections, contacts, decisions, or actions to be analysed together as a single, connected dataset."
+explanation:"Relationships tell Power BI how rows in different tables are connected."
 },
-
 {
-question:"A Planning Applications table is filtered to the last 5 years, but the Conditions table is not. What problem can this cause?",
+question:"Parent table filtered, child table not. What’s the issue?",
 options:[
 "Duplicate measures",
 "Broken visuals",
@@ -234,111 +216,159 @@ options:[
 "Orphaned records"
 ],
 correct:3,
-explanation:"If the parent table is filtered but the related child table is not, child records may remain that no longer relate to any visible parent record. These orphaned records can cause incorrect counts and misleading results in reports."
+explanation:"Child rows can remain without a matching parent, causing incorrect counts."
 },
-
 {
-question:"Why is it important to keep related tables in step in a Uniform data model?",
+question:"Why must related tables stay in step?",
 options:[
-"To ensure counts and measures remain accurate",
+"To ensure accurate counts",
 "To reduce file size",
-"To improve screen layout",
+"To improve layout",
 "To allow publishing"
 ],
 correct:0,
-explanation:"Keeping tables in step ensures that related records represent the same slice of data. If tables are out of step, measures may count records that should no longer be included, leading to incorrect totals and misleading analysis."
+explanation:"Out-of-step tables produce misleading totals."
 },
-
 {
-question:"What is the key difference between a calculated column and a measure in Power BI?",
+question:"Calculated column vs measure — what’s the key difference?",
 options:[
 "Measures only work in tables",
-"Columns are faster than measures",
-"Columns are calculated once per row, measures recalculate with filters",
-"Measures store data, columns do not"
+"Columns are faster",
+"Columns calculate once; measures recalc with filters",
+"Measures store data"
 ],
 correct:2,
-explanation:"Calculated columns are evaluated once per row when the data is loaded or refreshed. Measures are calculated dynamically when a visual is queried and respond to filters and slicers. This makes measures suitable for totals, KPIs, and summaries."
+explanation:"Measures recalculate dynamically; columns do not."
 },
-
 {
-question:"You are calculating the number of days between Received and Decision Issued. Some cases are still open. What should your DAX logic do first?",
+question:"Some cases have no decision date. What should DAX do first?",
 options:[
-"Replace missing dates with today’s date",
-"Check whether either date is blank",
-"Always return zero",
-"Convert dates to text"
+"Replace with today",
+"Check for blanks",
+"Return zero",
+"Convert to text"
 ],
 correct:1,
-explanation:"Some cases will not yet have a decision date. DAX should first check whether one or both dates are blank before attempting a calculation. This avoids producing misleading durations for cases that are still in progress."
+explanation:"Blank checks prevent misleading calculations."
 },
-
 {
-question:"Consider the following DAX measure:\n\nClosed Cases = CALCULATE ( COUNTROWS ( DCAPPL ), NOT ( ISBLANK ( DCAPPL[DATEDECISS] ) ) )\n\nWhat does this measure return?",
+question:"What does this measure return?\n\nCOUNTROWS where DATEDECISS is not blank",
 options:[
-"The total number of rows in DCAPPL",
-"The number of cases received today",
-"The number of visible rows only",
-"The number of cases with a decision date"
+"All rows",
+"Today’s cases",
+"Visible rows only",
+"Decided cases"
 ],
 correct:3,
-explanation:"This measure counts rows in the DCAPPL table where the decision date is not blank. In practice, this identifies cases that have been decided. Because it is a measure, the result will still change as filters and slicers are applied."
+explanation:"It counts cases with a decision date."
 },
-
 {
-question:"What happens when a user selects a slicer in a report?",
+question:"What does a slicer change?",
 options:[
-"The rows included in calculations change",
-"The measure logic changes",
-"The data source changes",
-"The report refreshes"
+"The rows included",
+"The logic",
+"The data source",
+"The refresh"
 ],
 correct:0,
-explanation:"Slicers change the filter context applied to the report. Measures are recalculated using only the rows that meet the selected criteria, but the underlying logic and source data remain unchanged."
+explanation:"Slicers change filter context only."
 },
-
 {
-question:"Formatting a date or number in Power BI affects what?",
+question:"Formatting affects what?",
 options:[
-"The stored value",
-"The calculation result",
-"How the value is displayed",
-"The refresh behaviour"
+"The value",
+"The calculation",
+"The display",
+"The refresh"
 ],
 correct:2,
-explanation:"Formatting affects only how a value is displayed to the user. The underlying value remains the same, and calculations continue to work as expected regardless of formatting."
+explanation:"Formatting changes appearance, not logic."
 },
-
 {
-question:"A report looks correct visually, but the numbers feel wrong. What should you check first?",
+question:"Report looks right but feels wrong. Check what first?",
 options:[
-"Colours and layout",
-"Relationships, measures, and filters",
-"Page navigation",
-"Visual titles"
+"Colours",
+"Relationships and measures",
+"Navigation",
+"Titles"
 ],
 correct:1,
-explanation:"A report can appear visually correct while still being logically incorrect. Relationships, measure logic, and filters should always be checked first to ensure the results genuinely reflect the underlying data."
+explanation:"Logic always comes before appearance."
 },
-
 {
-question:"Which statement correctly describes publishing, sharing, and refreshing in Power BI?",
+question:"Publishing vs sharing vs refresh?",
 options:[
-"Publishing shares the report",
-"Sharing refreshes the data",
-"Refreshing fixes errors",
-"Publishing puts the report online; sharing controls access; refresh updates data"
+"Publishing shares",
+"Sharing refreshes",
+"Refresh fixes errors",
+"Publish online; share access; refresh data"
 ],
 correct:3,
-explanation:"Publishing makes the report available in the Power BI Service, sharing controls who can access it, and refresh updates the data. These are separate actions and do not replace one another."
+explanation:"They are separate actions."
 }
-
 ];
 
 let current = 0;
 let score = 0;
 
-/* quiz logic unchanged */
+function startQuiz(){
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  render();
+}
+
+function render(){
+  const q = quizData[current];
+  const quiz = document.getElementById("quiz");
+  quiz.innerHTML = `
+    <div class="question-number">Question ${current+1} of ${quizData.length}</div>
+    <div class="question">${q.question.replace(/\n/g,"<br>")}</div>
+    ${q.options.map((o,i)=>`<div class="option" onclick="selectOption(${i})">${o}</div>`).join("")}
+    <div class="feedback" id="feedback"></div>
+    <div class="buttons">
+      <button class="btn-secondary" onclick="prev()" ${current===0?"disabled":""}>Previous</button>
+      <button class="btn-primary" id="nextBtn" disabled onclick="next()">Next</button>
+    </div>`;
+  document.getElementById("progressFill").style.width = ((current+1)/quizData.length*100)+"%";
+}
+
+function selectOption(i){
+  const opts = document.querySelectorAll(".option");
+  const fb = document.getElementById("feedback");
+  opts.forEach(o=>o.classList.add("disabled"));
+  if(i===quizData[current].correct){
+    opts[i].classList.add("correct");
+    fb.className="feedback correct";
+    fb.textContent="Correct – "+quizData[current].explanation;
+    score++;
+  } else {
+    opts[i].classList.add("incorrect");
+    opts[quizData[current].correct].classList.add("correct");
+    fb.className="feedback incorrect";
+    fb.textContent="Incorrect – "+quizData[current].explanation;
+  }
+  fb.style.display="block";
+  document.getElementById("nextBtn").disabled=false;
+}
+
+function next(){
+  current < quizData.length-1 ? (current++, render()) : showResults();
+}
+
+function prev(){
+  current--;
+  render();
+}
+
+function showResults(){
+  document.getElementById("quiz").style.display="none";
+  const r=document.getElementById("results");
+  r.style.display="block";
+  r.innerHTML=`
+    <h2>Learning Check Complete</h2>
+    <div class="score">${score} / ${quizData.length}</div>
+    <p>If anything was unclear, revisit the training materials.</p>`;
+}
 
 </script>
 </body>

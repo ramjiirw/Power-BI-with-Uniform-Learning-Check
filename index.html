@@ -164,8 +164,175 @@ button {
 <script>
 
 const quizData = [
-/* questions unchanged – omitted here for brevity in explanation,
-   but this file includes the full 14-question set exactly as locked */
+
+{
+question:"What is the main purpose of using Power BI alongside Uniform?",
+options:[
+"To replace Uniform screens with reports",
+"To analyse and present Uniform data in clear, interactive reports",
+"To automate statutory decisions",
+"To enter and update case data"
+],
+correct:1,
+explanation:"Power BI reads Uniform data and turns it into reports that help users understand volumes, performance, and trends. It does not replace Uniform or write data back."
+},
+
+{
+question:"When connecting Power BI to Uniform using ODBC, which statement is correct?",
+options:[
+"Power BI can update Uniform data",
+"Data is changed during refresh",
+"Uniform calculations are overwritten",
+"The connection is read-only"
+],
+correct:3,
+explanation:"ODBC connections are read-only. Power BI can never change Uniform data."
+},
+
+{
+question:"Where should you rename Uniform field names so the change applies everywhere in the report?",
+options:[
+"In Power Query",
+"In Table view",
+"In visual formatting",
+"In the report canvas"
+],
+correct:0,
+explanation:"Renaming in Power Query sets the column name once and applies it everywhere in the report."
+},
+
+{
+question:"You want a report to include only cases received in the last 5 years. Where should this filter usually be applied?",
+options:[
+"In every visual",
+"In a slicer only",
+"In Power Query",
+"In visual-level filters"
+],
+correct:2,
+explanation:"Filtering in Power Query defines the scope of the dataset and affects everything downstream."
+},
+
+{
+question:"What does a relationship between Uniform tables tell Power BI?",
+options:[
+"Which table loads first",
+"Which rows belong together",
+"Which visual to use",
+"Which table is editable"
+],
+correct:1,
+explanation:"Relationships tell Power BI how rows in one table match rows in another."
+},
+
+{
+question:"A Planning Applications table is filtered to the last 5 years, but the Conditions table is not. What problem can this cause?",
+options:[
+"Duplicate measures",
+"Broken visuals",
+"Slower refresh",
+"Orphaned records"
+],
+correct:3,
+explanation:"Child records may remain with no matching parent, causing incorrect counts and misleading results."
+},
+
+{
+question:"Why is it important to keep related tables in step in a Uniform data model?",
+options:[
+"To ensure counts and measures remain accurate",
+"To reduce file size",
+"To improve screen layout",
+"To allow publishing"
+],
+correct:0,
+explanation:"Out-of-step tables lead to measures counting records that no longer relate to visible cases."
+},
+
+{
+question:"What is the key difference between a calculated column and a measure in Power BI?",
+options:[
+"Measures only work in tables",
+"Columns are faster than measures",
+"Columns are calculated once per row, measures recalculate with filters",
+"Measures store data, columns do not"
+],
+correct:2,
+explanation:"Calculated columns are evaluated at load time. Measures recalculate dynamically with filters and slicers."
+},
+
+{
+question:"You are calculating the number of days between Received and Decision Issued. Some cases are still open. What should your DAX logic do first?",
+options:[
+"Replace missing dates with today’s date",
+"Check whether either date is blank",
+"Always return zero",
+"Convert dates to text"
+],
+correct:1,
+explanation:"Checking for blank dates prevents misleading durations for cases that are still in progress."
+},
+
+{
+question:"Consider the following DAX measure:\n\nClosed Cases = CALCULATE ( COUNTROWS ( DCAPPL ), NOT ( ISBLANK ( DCAPPL[DATEDECISS] ) ) )\n\nWhat does this measure return?",
+options:[
+"The total number of rows in DCAPPL",
+"The number of cases received today",
+"The number of visible rows only",
+"The number of cases with a decision date"
+],
+correct:3,
+explanation:"The measure counts cases where the decision date is not blank and responds to filters."
+},
+
+{
+question:"What happens when a user selects a slicer in a report?",
+options:[
+"The rows included in calculations change",
+"The measure logic changes",
+"The data source changes",
+"The report refreshes"
+],
+correct:0,
+explanation:"Slicers change filter context. Measures recalculate but logic and data remain unchanged."
+},
+
+{
+question:"Formatting a date or number in Power BI affects what?",
+options:[
+"The stored value",
+"The calculation result",
+"How the value is displayed",
+"The refresh behaviour"
+],
+correct:2,
+explanation:"Formatting changes appearance only. Calculations still use the underlying value."
+},
+
+{
+question:"A report looks correct visually, but the numbers feel wrong. What should you check first?",
+options:[
+"Colours and layout",
+"Relationships, measures, and filters",
+"Page navigation",
+"Visual titles"
+],
+correct:1,
+explanation:"A report can look right but be logically wrong. Always sanity-check the model and calculations."
+},
+
+{
+question:"Which statement correctly describes publishing, sharing, and refreshing in Power BI?",
+options:[
+"Publishing shares the report",
+"Sharing refreshes the data",
+"Refreshing fixes errors",
+"Publishing puts the report online; sharing controls access; refresh updates data"
+],
+correct:3,
+explanation:"These are separate steps: publish to make it available, share to control access, refresh to update data."
+}
+
 ];
 
 let current = 0;

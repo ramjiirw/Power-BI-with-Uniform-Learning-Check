@@ -161,12 +161,12 @@ button {
 
 <div class="followup" id="followup">
   <h2 style="margin-bottom:20px; color:#2a5298;">Optional Follow-up Questions</h2>
-  <p style="margin-bottom:12px;">
-    This optional section is intended to reinforce key concepts from the session.
+  <p style="margin-bottom:16px;">
+    This optional section reinforces key concepts from the session.
     It is not scored and does not affect your learning check result.
   </p>
-  <p style="margin-bottom:20px;">
-    Follow-up questions will be added here.
+  <p style="margin-bottom:24px;">
+    Follow-up questions can be added here later.
   </p>
   <button class="btn-secondary" onclick="closeFollowUp()">Back to results</button>
 </div>
@@ -175,12 +175,166 @@ button {
 
 <script>
 
-/* ---------- QUIZ DATA (UNCHANGED) ---------- */
+/* ===================== QUESTIONS ===================== */
+
 const quizData = [
-  /* 14 questions exactly as previously locked – unchanged */
+{
+question:"What is the main purpose of using Power BI alongside Uniform?",
+options:[
+"To replace Uniform screens with reports",
+"To analyse and present Uniform data in clear, interactive reports",
+"To automate statutory decisions",
+"To enter and update case data"
+],
+correct:1,
+explanation:"Power BI is used to analyse, summarise, and present data that already exists in Uniform. It allows users to explore volumes, performance, trends, and outcomes across large numbers of cases. Power BI does not replace Uniform, and it does not allow users to enter or update case data. All operational work continues to take place within Uniform itself."
+},
+{
+question:"When connecting Power BI to Uniform using ODBC, which statement is correct?",
+options:[
+"Power BI can update Uniform data",
+"Data is changed during refresh",
+"Uniform calculations are overwritten",
+"The connection is read-only"
+],
+correct:3,
+explanation:"When Power BI connects to Uniform via ODBC, the connection is strictly read-only. Power BI can query and retrieve data, but it cannot insert, update, or delete records in Uniform. Refreshing a dataset simply re-reads the data; it does not make any changes to the source system."
+},
+{
+question:"Where should you rename Uniform field names so the change applies everywhere in the report?",
+options:[
+"In Power Query",
+"In Table view",
+"In visual formatting",
+"In the report canvas"
+],
+correct:0,
+explanation:"Renaming fields in Power Query sets the column name once, before the data is loaded into the model. This renamed field is then used consistently across tables, measures, visuals, and pages. Renaming elsewhere only affects appearance in a limited context."
+},
+{
+question:"You want a report to include only cases received in the last five years. Where should this filter usually be applied?",
+options:[
+"In every visual",
+"In a slicer only",
+"In Power Query",
+"In visual-level filters"
+],
+correct:2,
+explanation:"Applying this filter in Power Query defines the scope of the dataset before it is loaded. This ensures that all measures, visuals, and pages are built on the same controlled set of data, and avoids repeatedly applying the same filter in multiple places."
+},
+{
+question:"What does a relationship between Uniform tables tell Power BI?",
+options:[
+"Which table loads first",
+"Which rows belong together",
+"Which visual to use",
+"Which table is editable"
+],
+correct:1,
+explanation:"Relationships tell Power BI how records in one table relate to records in another, usually through a shared key. This allows case records, inspections, contacts, decisions, or actions to be analysed together as a single, connected dataset."
+},
+{
+question:"A Planning Applications table is filtered to the last five years, but the Conditions table is not. What problem can this cause?",
+options:[
+"Duplicate measures",
+"Broken visuals",
+"Slower refresh",
+"Orphaned records"
+],
+correct:3,
+explanation:"If the parent table is filtered but the related child table is not, child records may remain that no longer relate to any visible parent record. These orphaned records can cause incorrect counts and misleading results in reports."
+},
+{
+question:"Why is it important to keep related tables in step in a Uniform data model?",
+options:[
+"To ensure counts and measures remain accurate",
+"To reduce file size",
+"To improve screen layout",
+"To allow publishing"
+],
+correct:0,
+explanation:"Keeping tables in step ensures that related records represent the same slice of data. If tables are out of step, measures may count records that should no longer be included, leading to incorrect totals and misleading analysis."
+},
+{
+question:"What is the key difference between a calculated column and a measure in Power BI?",
+options:[
+"Measures only work in tables",
+"Columns are faster than measures",
+"Columns are calculated once per row, measures recalculate with filters",
+"Measures store data, columns do not"
+],
+correct:2,
+explanation:"Calculated columns are evaluated once per row when the data is loaded or refreshed. Measures are calculated dynamically when a visual is queried and respond to filters and slicers. This makes measures suitable for totals, KPIs, and summaries."
+},
+{
+question:"You are calculating the number of days between Received and Decision Issued. Some cases are still open. What should your DAX logic do first?",
+options:[
+"Replace missing dates with today’s date",
+"Check whether either date is blank",
+"Always return zero",
+"Convert dates to text"
+],
+correct:1,
+explanation:"Some cases will not yet have a decision date. DAX should first check whether one or both dates are blank before attempting a calculation. This avoids producing misleading durations for cases that are still in progress."
+},
+{
+question:"Consider a measure that counts cases where the decision date is not blank. What does this represent?",
+options:[
+"All cases in the table",
+"Cases received today",
+"Cases currently visible only",
+"Cases that have been decided"
+],
+correct:3,
+explanation:"Using a non-blank decision date is a common way to identify cases that have been decided. Because this logic is implemented in a measure, the count will still change as filters and slicers are applied."
+},
+{
+question:"What happens when a user selects a slicer in a report?",
+options:[
+"The rows included in calculations change",
+"The measure logic changes",
+"The data source changes",
+"The report refreshes"
+],
+correct:0,
+explanation:"Slicers change the filter context applied to the report. Measures are recalculated using only the rows that meet the selected criteria, but the underlying logic and source data remain unchanged."
+},
+{
+question:"Formatting a date or number in Power BI affects what?",
+options:[
+"The stored value",
+"The calculation result",
+"How the value is displayed",
+"The refresh behaviour"
+],
+correct:2,
+explanation:"Formatting affects only how a value is displayed to the user. The underlying value remains the same, and calculations continue to work as expected regardless of formatting."
+},
+{
+question:"A report looks correct visually, but the numbers feel wrong. What should you check first?",
+options:[
+"Colours and layout",
+"Relationships, measures, and filters",
+"Page navigation",
+"Visual titles"
+],
+correct:1,
+explanation:"A report can appear visually correct while still being logically incorrect. Relationships, measure logic, and filters should always be checked first to ensure the results genuinely reflect the underlying data."
+},
+{
+question:"Which statement correctly describes publishing, sharing, and refreshing in Power BI?",
+options:[
+"Publishing shares the report",
+"Sharing refreshes the data",
+"Refreshing fixes errors",
+"Publishing puts the report online; sharing controls access; refresh updates data"
+],
+correct:3,
+explanation:"Publishing makes the report available in the Power BI Service, sharing controls who can access it, and refresh updates the data. These are separate actions and do not replace one another."
+}
 ];
 
-/* ---------- QUIZ LOGIC (UNCHANGED) ---------- */
+/* ===================== QUIZ LOGIC ===================== */
 
 let current = 0;
 let score = 0;
@@ -197,7 +351,7 @@ function render(){
 
   quiz.innerHTML = `
     <div class="question-number">Question ${current+1} of ${quizData.length}</div>
-    <div class="question">${q.question.replace(/\n/g,"<br>")}</div>
+    <div class="question">${q.question}</div>
     ${q.options.map((o,i)=>`<div class="option" onclick="selectOption(${i})">${o}</div>`).join("")}
     <div class="feedback" id="feedback"></div>
     <div class="buttons">
@@ -205,6 +359,7 @@ function render(){
       <button class="btn-primary" id="nextBtn" disabled onclick="next()">Next</button>
     </div>
   `;
+
   document.getElementById("progressFill").style.width =
     ((current+1)/quizData.length*100) + "%";
 }
@@ -245,37 +400,16 @@ function showResults(){
   r.style.display = "block";
 
   r.innerHTML = `
-    <div style="text-align:left; max-width:600px; margin:0 auto;">
-      <h2 style="margin-bottom:20px; color:#2a5298;">Learning Check Complete</h2>
+    <h2>Learning Check Complete</h2>
+    <div class="score">${score} / ${quizData.length}</div>
 
-      <p style="margin-bottom:16px;">
-        You’ve reached the end of the Power BI with Uniform learning check.
-      </p>
+    <p style="margin-top:16px;">
+      Want to reinforce any areas?
+    </p>
 
-      <div style="width:100%; text-align:center; margin:24px 0;">
-        <div class="score">${score} out of ${quizData.length}</div>
-      </div>
-
-      <p style="margin-bottom:16px;">
-        This score reinforces your understanding of how Power BI is used with Uniform data.
-      </p>
-
-      <p style="margin-bottom:16px;">
-        Want to reinforce any areas? You can optionally review a short set of follow-up questions.
-      </p>
-
-      <button class="btn-secondary" onclick="openFollowUp()" style="margin-bottom:24px;">
-        Optional follow-up questions
-      </button>
-
-      <p style="margin-bottom:10px; font-size:1.6em; font-weight:700; color:#2a5298;">
-        Thank you for attending Idox training
-      </p>
-
-      <p>
-        If you’d like to explore further training courses, please speak to your Idox account manager.
-      </p>
-    </div>
+    <button class="btn-secondary" onclick="openFollowUp()">
+      Optional follow-up questions
+    </button>
   `;
 }
 

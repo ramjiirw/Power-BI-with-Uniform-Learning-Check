@@ -400,16 +400,48 @@ function showResults(){
   r.style.display = "block";
 
   r.innerHTML = `
-    <h2>Learning Check Complete</h2>
-    <div class="score">${score} / ${quizData.length}</div>
+    <div style="text-align:left; max-width:600px; margin:0 auto;">
 
-    <p style="margin-top:16px;">
-      Want to reinforce any areas?
-    </p>
+      <h2 style="margin-bottom:20px; color:#2a5298;">
+        Learning Check Complete
+      </h2>
 
-    <button class="btn-secondary" onclick="openFollowUp()">
-      Optional follow-up questions
-    </button>
+      <p style="margin-bottom:16px;">
+        You’ve reached the end of the Power BI with Uniform training learning check.
+      </p>
+
+      <div style="width:100%; text-align:center; margin:24px 0;">
+        <div class="score">
+          ${score} out of ${quizData.length}
+        </div>
+      </div>
+
+      <p style="margin-bottom:16px;">
+        This score reinforces your understanding of how Power BI works with Uniform data,
+        including data preparation, modelling, calculations, filtering, and reporting behaviour.
+      </p>
+
+      <p style="margin-bottom:20px;">
+        If any areas were unclear, revisit the relevant sections of the training materials.
+      </p>
+
+      <p style="margin-bottom:16px;">
+        Want to reinforce any areas?
+      </p>
+
+      <button class="btn-secondary" onclick="openFollowUp()" style="margin-bottom:32px;">
+        Optional follow-up questions
+      </button>
+
+      <p style="margin-bottom:10px; font-size:1.6em; font-weight:700; color:#2a5298;">
+        Thank you for attending Idox training
+      </p>
+
+      <p>
+        If you’d like to explore further training courses, please speak to your Idox account manager.
+      </p>
+
+    </div>
   `;
 }
 
